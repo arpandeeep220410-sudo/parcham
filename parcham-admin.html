@@ -554,18 +554,19 @@ async function saveAll(){
       method:'PUT',
       headers:{
         'Content-Type':'application/json',
-        'X-Master-Key':'$2a$10$t3EQahbSMzxqLYJeRbDXXuvGrxTIJPDHQxNn6igx6e/pL/wFXtnli'
+        'X-Master-Key':'$2a$10$t3EQahbSMzxqLYJeRbDXXuvGrxTIJPDHQxNn6igx6e/pL/wFXtnli',
+        'X-Bin-Versioning':'false'
       },
       body:JSON.stringify(D)
     });
     const res = await r.json();
     console.log('Save result:', res);
-    t.textContent='\u2705 Saved to cloud!';
+    t.textContent='\u2705 Saved!';
     t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500);
     s.textContent='Cloud pe save hua \u2713'; s.className='save-txt ok';
   } catch(e){
     console.log('Save error:',e);
-    t.textContent='Error saving!';
+    t.textContent='Error!';
     t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500);
     s.textContent='Error'; s.className='save-txt';
   }
