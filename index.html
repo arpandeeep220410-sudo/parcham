@@ -1,10 +1,321 @@
-PLACEHOLDERasync function loadFromCloud(){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARCHAM EVENT 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--t:#00ffd0;--dark:#020f14;--bdr:rgba(0,255,208,0.18);--b2:rgba(255,255,255,0.07);--y:#ffd700;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:#020f14;}::-webkit-scrollbar-thumb{background:rgba(0,255,208,0.28);border-radius:3px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 55% at 15% 5%,rgba(0,100,120,0.32) 0%,transparent 60%),radial-gradient(ellipse 55% 75% at 85% 85%,rgba(6,35,90,0.38) 0%,transparent 60%);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,255,208,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,208,0.02) 1px,transparent 1px);background-size:55px 55px;}
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(960px,94vw);background:rgba(4,18,26,0.55);backdrop-filter:blur(36px) saturate(180%);border:1px solid rgba(255,255,255,0.09);border-radius:999px;padding:7px 14px 7px 10px;display:flex;align-items:center;justify-content:space-between;z-index:1000;box-shadow:0 8px 32px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.07);animation:navDrop .9s cubic-bezier(.22,.9,.36,1) both;}
+@keyframes navDrop{from{opacity:0;transform:translateX(-50%) translateY(-20px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;}
+.nav-logo-box{width:36px;height:36px;border-radius:10px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--t),#0af);display:flex;align-items:center;justify-content:center;}
+.nav-logo-box img{width:100%;height:100%;object-fit:cover;}
+.logo-ltr{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#000;}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center;}
+.nav-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;font-weight:500;padding:7px 12px;border-radius:999px;transition:all .22s;white-space:nowrap;}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.07);}
+.nav-cta{background:linear-gradient(135deg,var(--t),#0af)!important;color:#000!important;font-family:'Syne',sans-serif;font-weight:700!important;padding:8px 20px!important;border-radius:999px;box-shadow:0 0 16px rgba(0,255,208,0.3);}
+.nav-cta:hover{box-shadow:0 0 30px rgba(0,255,208,0.55)!important;transform:scale(1.04);}
+@media(max-width:680px){.hide-mob{display:none!important;}nav{padding:7px 12px;}}
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 60px;text-align:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.22;filter:saturate(.5) brightness(.8);}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(2,15,20,.15) 0%,rgba(2,15,20,.55) 50%,rgba(2,15,20,1) 100%);}
+.hero-content{position:relative;z-index:1;width:100%;max-width:860px;}
+.stock-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:999px;padding:7px 20px;font-size:13px;font-weight:600;color:var(--y);margin-bottom:24px;animation:fadeUp 1s .1s both;}
+.sdot{width:7px;height:7px;background:var(--y);border-radius:50%;animation:blink 1.8s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(38px,7vw,86px);letter-spacing:-2px;line-height:.93;animation:fadeUp 1s .25s both;}
+.hero-grad{display:block;background:linear-gradient(170deg,#fff 0%,#aaffed 28%,var(--t) 62%,#00a87a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-year{font-family:'Space Grotesk',sans-serif;font-size:clamp(13px,2vw,19px);font-weight:700;letter-spacing:8px;color:rgba(255,255,255,0.32);margin:10px 0 8px;animation:fadeUp 1s .38s both;}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,2.5vw,25px);color:rgba(255,255,255,0.6);margin-bottom:32px;animation:fadeUp 1s .5s both;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:52px;animation:fadeUp 1s .62s both;}
+.btn-p{background:linear-gradient(135deg,var(--t),#0af);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;padding:13px 36px;border-radius:999px;text-decoration:none;box-shadow:0 0 28px rgba(0,255,208,0.35);transition:all .3s;border:none;cursor:pointer;display:inline-block;}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,255,208,0.6);}
+.btn-g{border:1px solid rgba(255,255,255,0.16);color:#fff;font-size:15px;padding:13px 34px;border-radius:999px;text-decoration:none;background:rgba(255,255,255,0.04);transition:all .3s;display:inline-block;}
+.btn-g:hover{border-color:var(--t);color:var(--t);transform:translateY(-3px);}
+.hero-imgs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s .75s both;}
+.spk-card{flex:1;min-width:120px;max-width:195px;border-radius:16px;overflow:hidden;border:1px solid rgba(0,255,208,0.16);box-shadow:0 20px 50px rgba(0,0,0,0.5);transition:.4s;position:relative;}
+.spk-card img{width:100%;height:155px;object-fit:cover;display:block;filter:saturate(.75);transition:.4s;background:linear-gradient(135deg,#073040,#031830);}
+.spk-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 28px 65px rgba(0,0,0,0.6),0 0 24px rgba(0,255,208,0.12);}
+.spk-card:hover img{filter:saturate(1.15);}
+.spk-label{position:absolute;bottom:0;left:0;right:0;padding:22px 10px 9px;background:linear-gradient(to top,rgba(2,15,20,.96),transparent);font-size:11px;font-weight:600;color:#fff;text-align:center;letter-spacing:.4px;}
+.vstrip{position:relative;z-index:1;width:100%;background:rgba(0,0,0,.2);border-top:1px solid rgba(0,255,208,0.07);border-bottom:1px solid rgba(0,255,208,0.07);padding:26px 0 20px;}
+.vstrip-head{text-align:center;margin-bottom:16px;}
+.vstrip-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t);font-family:'Space Grotesk',sans-serif;margin-bottom:4px;}
+.vstrip-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(17px,2.5vw,26px);color:rgba(255,255,255,0.58);}
+.vtrack-wrap{overflow:hidden;width:100%;}
+.vtrack{display:flex;gap:10px;padding:0 16px;animation:scrollV 32s linear infinite;width:max-content;}
+.vtrack:hover{animation-play-state:paused;}
+.vcell{width:252px;height:142px;flex-shrink:0;overflow:hidden;position:relative;border-radius:13px;border:1px solid rgba(0,255,208,0.1);background:#0a2030;}
+.vcell video,.vcell img.vimg{width:100%;height:100%;object-fit:cover;display:block;}
+.vcell::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(2,15,20,.75) 0%,transparent 55%);z-index:1;pointer-events:none;}
+.vcell-lbl{position:absolute;bottom:8px;left:11px;font-size:10px;color:rgba(255,255,255,0.5);z-index:2;letter-spacing:.5px;}
+@keyframes scrollV{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+section{position:relative;z-index:1;padding:80px 40px;max-width:1100px;margin:0 auto;}
+@media(max-width:600px){section{padding:60px 18px;}}
+.sec-lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--t);margin-bottom:8px;font-family:'Space Grotesk',sans-serif;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:800;margin-bottom:36px;line-height:1.12;}
+.venues-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:20px;}
+.venue{background:rgba(255,255,255,0.04);backdrop-filter:blur(18px);border:1px solid rgba(0,255,208,0.11);border-radius:22px;overflow:hidden;transition:all .42s cubic-bezier(.22,.9,.36,1);opacity:0;transform:translateY(28px);position:relative;}
+.venue.vis{opacity:1;transform:translateY(0);}
+.vshine{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--t),transparent);opacity:0;transition:.4s;}
+.venue.av:hover .vshine{opacity:1;}
+.venue.av{cursor:pointer;}
+.venue.av:hover{transform:translateY(-10px) scale(1.025)!important;box-shadow:0 26px 60px rgba(0,0,0,0.45),0 0 30px rgba(0,255,208,0.1);border-color:rgba(0,255,208,0.38);}
+.venue.cs{cursor:default;border-color:rgba(255,255,255,0.05);}
+.venue.cs.vis{opacity:.5!important;}
+.venue-img{width:100%;height:128px;object-fit:cover;display:block;transition:.4s;filter:saturate(.65) brightness(.82);background:linear-gradient(135deg,#073040,#031830);}
+.venue.av:hover .venue-img{filter:saturate(1.1) brightness(1.05);}
+.venue.cs .venue-img{filter:saturate(.12) brightness(.38);}
+.vbody{padding:18px;}
+.vicon{font-size:20px;margin-bottom:7px;}
+.venue h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:2px;}
+.vstate{font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+.vavail{font-size:12px;font-weight:600;color:var(--t);margin-bottom:3px;}
+.vtix{font-size:11px;color:rgba(255,255,255,0.26);margin-bottom:14px;}
+.vsoon-txt{font-size:12px;color:rgba(255,255,255,0.2);margin-bottom:14px;}
+.vbtn{display:block;width:100%;background:rgba(0,255,208,0.07);border:1px solid rgba(0,255,208,0.22);color:var(--t);padding:10px;border-radius:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:.8px;text-align:center;transition:all .3s;}
+.venue.av:hover .vbtn{background:linear-gradient(135deg,var(--t),#0af);color:#000;border-color:transparent;box-shadow:0 0 20px rgba(0,255,208,0.38);}
+.vsoon-tag{display:block;width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.22);padding:9px;border-radius:11px;font-size:11px;letter-spacing:.8px;text-align:center;}
+.trust-wrap{position:relative;z-index:1;padding:0 40px 60px;max-width:1100px;margin:0 auto;}
+.trust-box{background:rgba(255,50,50,0.05);border:1px solid rgba(255,80,80,0.16);border-radius:20px;padding:24px 34px;text-align:center;}
+.trust-box h3{font-family:'Syne',sans-serif;font-size:16px;color:#ff7070;margin-bottom:6px;}
+.trust-box p{color:rgba(255,255,255,0.4);font-size:14px;line-height:1.85;}
+@media(max-width:600px){.trust-wrap{padding:0 18px 50px;}}
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px;}
+.rev-card{background:rgba(255,255,255,0.04);border:1px solid var(--b2);border-radius:18px;padding:22px;transition:.3s;}
+.rev-card:hover{border-color:var(--bdr);transform:translateY(-4px);}
+.rev-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.rev-av{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--bdr);flex-shrink:0;background:linear-gradient(135deg,#0d3d50,#062d63);}
+.rev-name{font-size:14px;font-weight:600;}
+.rev-ticket{font-size:11px;color:var(--t);margin-top:2px;}
+.rev-stars{color:var(--y);font-size:13px;margin-bottom:8px;letter-spacing:2px;}
+.rev-text{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.72;}
+.proof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:13px;}
+.proof-item{border-radius:13px;overflow:hidden;border:1px solid var(--b2);aspect-ratio:4/3;position:relative;background:#0a1e28;}
+.proof-item img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s;}
+.proof-item:hover img{transform:scale(1.04);}
+.contact-sec{position:relative;z-index:1;padding:60px 40px 80px;max-width:700px;margin:0 auto;text-align:center;}
+.contact-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:clamp(28px,5vw,52px);margin-bottom:10px;line-height:1.1;}
+.contact-sub{font-size:14px;color:rgba(255,255,255,0.34);margin-bottom:34px;line-height:1.85;}
+.contact-cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cc{background:rgba(255,255,255,0.04);border:1px solid var(--b2);border-radius:16px;padding:20px 24px;min-width:140px;transition:.3s;text-decoration:none;color:#fff;display:block;}
+.cc:hover{border-color:var(--t);transform:translateY(-5px);box-shadow:0 0 22px rgba(0,255,208,0.1);}
+.cc-icon{font-size:22px;margin-bottom:7px;}
+.cc-lbl{font-size:10px;color:rgba(255,255,255,0.28);margin-bottom:4px;letter-spacing:1.5px;text-transform:uppercase;}
+.cc-val{font-size:13px;font-weight:500;color:var(--t);}
+footer{position:relative;z-index:1;text-align:center;padding:26px;border-top:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.16);font-size:12px;}
+.vpop{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);backdrop-filter:blur(18px);padding:20px;}
+.vpop.open{display:flex;}
+.vpop-box{background:rgba(4,18,28,0.98);border:1px solid rgba(0,255,208,0.2);border-radius:26px;width:min(580px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 0 80px rgba(0,255,208,0.1),0 40px 80px rgba(0,0,0,0.7);animation:popIn .38s cubic-bezier(.22,.9,.36,1);position:relative;}
+@keyframes popIn{from{transform:scale(.86);opacity:0;}to{transform:scale(1);opacity:1;}}
+.vpop-cover{width:100%;height:192px;object-fit:cover;border-radius:26px 26px 0 0;display:block;background:linear-gradient(135deg,#062d40,#031830);}
+.vpop-close{position:absolute;top:13px;right:14px;background:rgba(0,0,0,0.6);border:none;color:rgba(255,255,255,0.65);font-size:16px;cursor:pointer;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;z-index:10;}
+.vpop-close:hover{background:rgba(200,50,50,.4);color:#fff;}
+.vpop-body{padding:26px 30px 32px;}
+.vpop-tag{font-size:10px;letter-spacing:2px;color:var(--t);text-transform:uppercase;margin-bottom:4px;font-family:'Space Grotesk',sans-serif;}
+.vpop-name{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:2px;}
+.vpop-state{font-size:12px;color:rgba(255,255,255,0.34);margin-bottom:16px;}
+.vpop-info{background:rgba(0,255,208,0.05);border:1px solid var(--bdr);border-radius:11px;padding:12px 15px;font-size:13px;margin-bottom:18px;display:flex;flex-direction:column;gap:7px;}
+.vpop-info span{color:var(--t);font-weight:600;}
+.price-row{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+.p-old{font-size:16px;color:rgba(255,255,255,0.28);text-decoration:line-through;}
+.p-new{font-size:28px;font-family:'Syne',sans-serif;font-weight:800;color:var(--t);}
+.p-badge{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.24);color:var(--y);font-size:11px;padding:3px 10px;border-radius:999px;}
+.p-why{font-size:12px;color:rgba(255,255,255,0.33);margin-bottom:20px;line-height:1.7;}
+.how-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:13px;}
+.steps{display:flex;flex-direction:column;margin-bottom:20px;}
+.step{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.step:last-child{border-bottom:none;}
+.step-n{width:28px;height:28px;border-radius:50%;background:rgba(0,255,208,0.08);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--t);flex-shrink:0;margin-top:2px;}
+.step-h{font-size:13px;font-weight:600;margin-bottom:3px;}
+.step-b{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.65;}
+.ph-inp{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(0,255,208,0.16);border-radius:10px;padding:11px 14px;color:#fff;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:.3s;margin-top:8px;}
+.ph-inp:focus{border-color:var(--t);box-shadow:0 0 0 3px rgba(0,255,208,0.08);}
+.vfy-btn{margin-top:8px;background:rgba(0,255,208,0.07);border:1px solid var(--bdr);color:var(--t);padding:8px 20px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600;transition:.3s;font-family:'DM Sans',sans-serif;}
+.vfy-btn:hover{background:rgba(0,255,208,0.15);}
+.meet-box{margin-top:9px;background:rgba(0,255,208,0.04);border:1px solid rgba(0,255,208,0.11);border-radius:12px;padding:14px;}
+.meet-box p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.72;margin-bottom:8px;}
+.meet-line{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t);font-weight:600;flex-wrap:wrap;}
+.reply-pill{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);color:var(--y);font-size:10px;padding:3px 9px;border-radius:999px;}
+.buy-btn{width:100%;background:linear-gradient(135deg,var(--t),#0af);color:#000;border:none;border-radius:13px;padding:15px;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 0 26px rgba(0,255,208,0.35);transition:all .3s;margin-top:20px;letter-spacing:.4px;}
+.buy-btn:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,255,208,0.58);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+/* SVG PLACEHOLDERS */
+.ph-hero{background:linear-gradient(135deg,#073040 0%,#020f14 100%);}
+.ph-city{background:linear-gradient(135deg,#062d40 0%,#031a26 100%);}
+.ph-person{background:linear-gradient(135deg,#0d3d50,#062d63);}
+.ph-proof{background:linear-gradient(135deg,#0a1e28,#041830);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-box" id="navLogoBox">
+      <span class="logo-ltr" id="navLogoLtr">P</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li class="hide-mob"><a href="#venues">Venues</a></li>
+    <li class="hide-mob"><a href="#reviews">Reviews</a></li>
+    <li class="hide-mob"><a href="#proof">Proof</a></li>
+    <li class="hide-mob"><a href="#contact" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;">Contact Us</a></li>
+    <li><a href="#venues" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg ph-hero"><img id="heroBg" src="" alt="bg"></div>
+  <div class="hero-content">
+    <div class="stock-badge"><div class="sdot"></div><span id="badgeText">Limited Stock — Only 105 Tickets Left!</span></div>
+    <h1 class="hero-title"><span id="heroTitle">PARCHAM</span><br><span class="hero-grad" id="heroSub">EVENT</span></h1>
+    <div class="hero-year" id="heroYear">2 0 2 6</div>
+    <div class="hero-tagline" id="heroTagline">India's Biggest Student Meetup</div>
+    <div class="hero-btns">
+      <a href="#venues" class="btn-p">Grab Your Ticket →</a>
+      <a href="#proof" class="btn-g">See Proof</a>
+    </div>
+    <div class="hero-imgs" id="spkWrap"></div>
+  </div>
+</div>
+
+<!-- VIDEO STRIP -->
+<div class="vstrip">
+  <div class="vstrip-head">
+    <div class="vstrip-lbl">Last Year Highlights</div>
+    <div class="vstrip-title">Moments from Parcham 2025</div>
+  </div>
+  <div class="vtrack-wrap"><div class="vtrack" id="vidTrack"></div></div>
+</div>
+
+<!-- VENUES -->
+<section id="venues">
+  <p class="sec-lbl">Select Your City</p>
+  <h2 class="sec-title">Choose Your Venue</h2>
+  <div class="venues-grid" id="venueGrid"></div>
+</section>
+
+<!-- TRUST -->
+<div class="trust-wrap">
+  <div class="trust-box">
+    <h3>🔒 Trusted & Verified</h3>
+    <p id="trustTxt">Trusted by <strong>500+ students</strong> last year &nbsp;·&nbsp; Every ticket is sealed and verified</p>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <p class="sec-lbl">What Students Say</p>
+  <h2 class="sec-title">Student Reviews</h2>
+  <div class="rev-grid" id="revGrid"></div>
+</section>
+
+<!-- PROOF -->
+<section id="proof">
+  <p class="sec-lbl">Real Students, Real Payments</p>
+  <h2 class="sec-title">Payment Proof</h2>
+  <div class="proof-grid" id="proofGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-sec" id="contact">
+  <div class="sec-lbl" style="display:block;margin-bottom:6px;">Reach Out</div>
+  <div class="contact-title">Let's Connect</div>
+  <div class="contact-sub">Questions? We reply within 10 minutes to 1 hour.</div>
+  <div class="contact-cards" id="contactCards"></div>
+</div>
+
+<footer>© 2026 Parcham Event — All Rights Reserved</footer>
+
+<!-- VENUE POPUP -->
+<div class="vpop" id="vpop">
+  <div class="vpop-box">
+    <button class="vpop-close" onclick="closeV()">✕</button>
+    <img class="vpop-cover ph-city" id="vpCover" src="" alt="">
+    <div class="vpop-body">
+      <div class="vpop-tag">Venue Details</div>
+      <div class="vpop-name" id="vpName"></div>
+      <div class="vpop-state" id="vpState"></div>
+      <div class="vpop-info">
+        <div>📅 Event Date: <span id="vpDate"></span></div>
+        <div>🏛 Venue Hall: <span id="vpHall"></span></div>
+        <div>📍 City: <span id="vpCity"></span></div>
+      </div>
+      <div class="price-row">
+        <div class="p-old" id="vpOld"></div>
+        <div class="p-new" id="vpNew"></div>
+        <div class="p-badge" id="vpBadge"></div>
+      </div>
+      <div class="p-why" id="vpDesc"></div>
+      <div class="how-title">How It Works</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div><div class="step-h">Select Your Venue</div><div class="step-b">You've picked the city. Now enter your number below.</div></div></div>
+        <div class="step"><div class="step-n">2</div>
+          <div style="width:100%">
+            <div class="step-h">Enter WhatsApp Number</div>
+            <div class="step-b">Your ticket will be sent to this number. Enter carefully.</div>
+            <input class="ph-inp" id="phoneIn" type="tel" placeholder="Enter your WhatsApp number...">
+            <button class="vfy-btn" id="vfyBtn" onclick="verifyPh()">Verify Number ✓</button>
+          </div>
+        </div>
+        <div class="step"><div class="step-n">3</div>
+          <div>
+            <div class="step-h">Pay & Get Your Ticket</div>
+            <div class="meet-box">
+              <p id="vpMeet">Pay live on Google Meet with our admin. Ticket sent to your WhatsApp instantly.</p>
+              <div class="meet-line">✈️ Contact Admin <span class="reply-pill" id="vpReply">Reply in 10 min – 1 hr</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="buy-btn" onclick="buyNow()">Buy Ticket Now →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── LOAD CONFIG from Admin Panel ─────────────────────────
+const DEF = {
+  g:{title:'PARCHAM',sub:'EVENT',year:'2 0 2 6',tag:"India's Biggest Student Meetup",badge:'Limited Stock — Only 105 Tickets Left!',date:'15 March 2026 — Sunday',hall:'Main Auditorium',trust:'Trusted by <strong>500+ students</strong> last year &nbsp;·&nbsp; Every ticket is sealed and verified'},
+  l:{buy:'',buy_ig:'no',tg:'',tg_txt:'@YOURUSERNAME',ig:'',ig_txt:'@YOURUSERNAME',wa:'',wa_txt:'+91 99999 99999',em:'',em_txt:'you@email.com'},
+  i:{bg:'',logo:'',spk:[{p:'',n:'Speaker Name 1'},{p:'',n:'Speaker Name 2'},{p:'',n:'Speaker Name 3'}]},
+  v:[{url:'',lbl:'Opening Ceremony'},{url:'',lbl:'Crowd Energy'},{url:'',lbl:'Stage Moments'}],
+  ven:[
+    {name:'Delhi',state:'New Delhi, India',photo:'',tickets:'60 tickets left',status:'available',icon:'🏛️'},
+    {name:'Patna',state:'Bihar, India',photo:'',tickets:'45 tickets left',status:'available',icon:'🌉'},
+    {name:'Jaipur',state:'Rajasthan, India',photo:'',tickets:'Date announcing soon',status:'coming',icon:'🏰'},
+    {name:'Varanasi',state:'Uttar Pradesh, India',photo:'',tickets:'Date announcing soon',status:'coming',icon:'⛩️'}
+  ],
+  pr:{old:'₹999',nw:'₹499',badge:'50% OFF',desc:'We kept the price low so every student can attend. Original cost covers venue & production — we absorb the rest.',meet:'Pay live on Google Meet with our admin. Ticket sent to your WhatsApp instantly.',reply:'Reply in 10 min – 1 hr'},
+  rev:[
+    {name:'Rohit Kumar',ticket:'🎟 Delhi Ticket',stars:5,text:'Life changing event! The energy was unreal. Every student must attend this once in their life.',photo:''},
+    {name:'Anjali Sharma',ticket:'🎟 Patna Ticket',stars:5,text:'Baaki events se bilkul alag hai. Worth every rupee. Sach mein life changing experience!',photo:''},
+    {name:'Aryan Gupta',ticket:'🎟 Delhi Ticket',stars:4,text:'Amazing speakers, great crowd. Aage bhi aaunga zaroor. Highly recommended!',photo:''}
+  ],
+  proof:['','','','','','']
+};
+
+let C = DEF;
+try { const saved = localStorage.getItem('parcham_cfg'); if(saved) C = {...DEF, ...JSON.parse(saved)}; } catch(e){}
+
+async function loadFromCloud(){
   try {
     const res = await fetch('https://api.jsonbin.io/v3/b/69b60398b7ec241ddc6c2ad1/latest', {
       headers:{'X-Master-Key':'$2a$10$t3EQahbSMzxqLYJeRbDXXuvGrxTIJPDHQxNn6igx6e/pL/wFXtnli'}
     });
     const json = await res.json();
-    console.log('Cloud data loaded:', json);
     if(json.record && json.record.g){
       C = {...DEF, ...json.record};
       localStorage.setItem('parcham_cfg', JSON.stringify(C));
@@ -13,3 +324,161 @@ PLACEHOLDERasync function loadFromCloud(){
   } catch(e){ console.log('Cloud error:',e); }
 }
 loadFromCloud();
+
+// ── SVG PLACEHOLDERS ──────────────────────────────────────
+const PH = {
+  hero: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Cdefs%3E%3CradialGradient id='g' cx='20%25' cy='20%25' r='65%25'%3E%3Cstop offset='0' stop-color='%23073040'/%3E%3Cstop offset='1' stop-color='%23020f14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='1600' height='900' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='200' r='220' fill='%2300ffd0' opacity='.04'/%3E%3Ccircle cx='1300' cy='700' r='280' fill='%230af' opacity='.04'/%3E%3C/svg%3E",
+  city: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='200'%3E%3Crect width='500' height='200' fill='%23062d40'/%3E%3Crect x='0' y='145' width='500' height='55' fill='%23020f14'/%3E%3Crect x='40' y='55' width='48' height='120' rx='4' fill='%230a5060'/%3E%3Crect x='105' y='38' width='58' height='137' rx='4' fill='%230d6070'/%3E%3Crect x='185' y='68' width='48' height='107' rx='4' fill='%230a5060'/%3E%3Crect x='252' y='45' width='65' height='130' rx='4' fill='%230d6070'/%3E%3Crect x='338' y='58' width='50' height='117' rx='4' fill='%230a5060'/%3E%3Crect x='405' y='40' width='55' height='135' rx='4' fill='%230d6070'/%3E%3C/svg%3E",
+  person: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='320'%3E%3Crect width='400' height='320' fill='%23073040'/%3E%3Ccircle cx='200' cy='110' r='68' fill='%231a6070' opacity='.85'/%3E%3Cellipse cx='200' cy='295' rx='115' ry='78' fill='%231a6070' opacity='.7'/%3E%3C/svg%3E",
+  avatar: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%230d3d50' rx='50'/%3E%3Ccircle cx='50' cy='38' r='22' fill='%231a6070'/%3E%3Cellipse cx='50' cy='90' rx='34' ry='26' fill='%231a6070'/%3E%3C/svg%3E",
+  proof: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%230a1e28'/%3E%3Crect x='15' y='15' width='370' height='65' rx='8' fill='%23112a36'/%3E%3Ccircle cx='45' cy='47' r='18' fill='%230d3d50'/%3E%3Crect x='75' y='35' width='130' height='10' rx='3' fill='%231a4050'/%3E%3Crect x='280' y='30' width='90' height='32' rx='6' fill='%23094d60'/%3E%3Ctext x='325' y='51' text-anchor='middle' fill='%2300ffd0' font-size='13' font-family='sans-serif' font-weight='bold'%3E%E2%9C%93 PAID%3C/text%3E%3C/svg%3E",
+  video: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='252' height='142'%3E%3Crect width='252' height='142' fill='%230a2030'/%3E%3Ccircle cx='126' cy='60' r='28' fill='%23073040' stroke='%2300ffd0' stroke-width='1.5' opacity='.6'/%3E%3Cpolygon points='119,48 119,72 145,60' fill='%2300ffd0' opacity='.5'/%3E%3C/svg%3E"
+};
+
+function imgSrc(url, fallback){ return url && url.trim() ? url.trim() : PH[fallback]||PH.city; }
+
+// ── RENDER ───────────────────────────────────────────────
+function render(){
+  const g=C.g||DEF.g, l=C.l||DEF.l, im=C.i||DEF.i;
+
+  // General text
+  setText('heroTitle', g.title||'PARCHAM');
+  setText('heroSub', g.sub||'EVENT');
+  setText('heroYear', g.year||'2 0 2 6');
+  setText('heroTagline', g.tag||"India's Biggest Student Meetup");
+  setText('badgeText', g.badge||'Limited Stock!');
+  innerHTML('trustTxt', g.trust||DEF.g.trust);
+
+  // Hero BG
+  const hbg = document.getElementById('heroBg');
+  hbg.src = im.bg||PH.hero;
+  hbg.onerror = ()=>{ hbg.src=PH.hero; };
+
+  // Logo
+  const logoBox = document.getElementById('navLogoBox');
+  const logoLtr = document.getElementById('navLogoLtr');
+  if(im.logo){ const img=document.createElement('img'); img.src=im.logo; img.onerror=()=>{logoBox.innerHTML='<span class="logo-ltr">P</span>';}; logoBox.innerHTML=''; logoBox.appendChild(img); }
+
+  // Speakers
+  const spkWrap = document.getElementById('spkWrap');
+  spkWrap.innerHTML = (im.spk||DEF.i.spk).map(s=>`
+    <div class="spk-card">
+      <img src="${s.p||PH.person}" alt="${s.n}" onerror="this.src='${PH.person}'">
+      <div class="spk-label">${s.n||'Speaker'}</div>
+    </div>`).join('');
+
+  // Videos
+  const vids = C.v||DEF.v;
+  const allVids = [...vids,...vids]; // duplicate for seamless loop
+  document.getElementById('vidTrack').innerHTML = allVids.map((v,i)=>`
+    <div class="vcell">
+      ${v.url ? `<video autoplay muted loop playsinline src="${v.url}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"></video><img class="vimg" src="${PH.video}" style="display:none">` : `<img class="vimg" src="${PH.video}">`}
+      <div class="vcell-lbl">${v.lbl||'Highlights'}</div>
+    </div>`).join('');
+
+  // Venues
+  const vens = C.ven||DEF.ven;
+  document.getElementById('venueGrid').innerHTML = vens.map((v,i)=>{
+    const av = v.status==='available';
+    return `<div class="venue ${av?'av':'cs'}" ${av?`onclick="openV(${i})"`:''}">
+      <div class="vshine"></div>
+      <img class="venue-img" src="${imgSrc(v.photo,'city')}" alt="${v.name}" onerror="this.src='${PH.city}'">
+      <div class="vbody">
+        <div class="vicon">${v.icon||'📍'}</div>
+        <h3>${v.name}</h3>
+        <div class="vstate">${v.state}</div>
+        ${av ? `<div class="vavail">● Available</div><div class="vtix">${v.tickets}</div><div class="vbtn">Select Venue →</div>`
+              : `<div class="vsoon-txt">Coming Soon</div><div class="vtix">${v.tickets}</div><div class="vsoon-tag">🔔 Notify Me</div>`}
+      </div>
+    </div>`;
+  }).join('');
+
+  // Reviews
+  const revs = C.rev||DEF.rev;
+  document.getElementById('revGrid').innerHTML = revs.map(r=>`
+    <div class="rev-card">
+      <div class="rev-head">
+        <img class="rev-av" src="${imgSrc(r.photo,'avatar')}" alt="${r.name}" onerror="this.src='${PH.avatar}'">
+        <div><div class="rev-name">${r.name}</div><div class="rev-ticket">${r.ticket}</div></div>
+      </div>
+      <div class="rev-stars">${'★'.repeat(r.stars||5)}${'☆'.repeat(5-(r.stars||5))}</div>
+      <div class="rev-text">${r.text}</div>
+    </div>`).join('');
+
+  // Proof
+  const proofs = C.proof||DEF.proof;
+  document.getElementById('proofGrid').innerHTML = proofs.map(p=>`
+    <div class="proof-item"><img src="${imgSrc(p,'proof')}" alt="proof" onerror="this.src='${PH.proof}'"></div>`).join('');
+
+  // Contact cards
+  const cards = [];
+  if(l.tg)  cards.push({icon:'✈️',lbl:'Telegram',val:l.tg_txt||'Telegram',href:l.tg});
+  if(l.ig)  cards.push({icon:'📸',lbl:'Instagram',val:l.ig_txt||'Instagram',href:l.ig});
+  if(l.wa)  cards.push({icon:'💬',lbl:'WhatsApp',val:l.wa_txt||'WhatsApp',href:l.wa});
+  if(l.em)  cards.push({icon:'📧',lbl:'Email',val:l.em_txt||l.em,href:'mailto:'+l.em});
+  if(!cards.length) cards.push({icon:'✈️',lbl:'Telegram',val:'@YOURUSERNAME',href:'#'},{icon:'💬',lbl:'WhatsApp',val:'+91 99999 99999',href:'#'});
+  document.getElementById('contactCards').innerHTML = cards.map(c=>`
+    <a href="${c.href}" target="_blank" class="cc">
+      <div class="cc-icon">${c.icon}</div>
+      <div class="cc-lbl">${c.lbl}</div>
+      <div class="cc-val">${c.val}</div>
+    </a>`).join('');
+
+  // Popup info
+  const pr = C.pr||DEF.pr;
+  setText('vpDate', g.date||'15 March 2026');
+  setText('vpHall', g.hall||'Main Auditorium');
+  setText('vpOld', pr.old||'₹999');
+  setText('vpNew', pr.nw||'₹499');
+  setText('vpBadge', pr.badge||'50% OFF');
+  setText('vpDesc', pr.desc||'');
+  setText('vpMeet', pr.meet||'');
+  setText('vpReply', pr.reply||'');
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('vis'),i*110); obs.unobserve(e.target); } });
+  },{threshold:0.07});
+  document.querySelectorAll('.venue').forEach(v=>obs.observe(v));
+}
+
+function setText(id,val){ const e=document.getElementById(id); if(e) e.textContent=val; }
+function innerHTML(id,val){ const e=document.getElementById(id); if(e) e.innerHTML=val; }
+
+// ── POPUP ─────────────────────────────────────────────────
+const vens = ()=> C.ven||DEF.ven;
+function openV(i){
+  const v=vens()[i]; if(!v)return;
+  const cover=document.getElementById('vpCover');
+  cover.src = v.photo||PH.city;
+  cover.onerror = ()=>{ cover.src=PH.city; };
+  setText('vpName',v.name); setText('vpState',v.state); setText('vpCity',v.name);
+  document.getElementById('phoneIn').value='';
+  const b=document.getElementById('vfyBtn');
+  b.textContent='Verify Number ✓'; b.style.background=''; b.style.color=''; b.disabled=false;
+  document.getElementById('vpop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeV(){ document.getElementById('vpop').classList.remove('open'); document.body.style.overflow=''; }
+window.onclick = e=>{ if(e.target.id==='vpop') closeV(); };
+
+function verifyPh(){
+  const p=document.getElementById('phoneIn').value.trim();
+  if(p.length<10){alert('Enter a valid 10-digit WhatsApp number!');return;}
+  const b=document.getElementById('vfyBtn');
+  b.textContent='✓ Verified!'; b.style.background='rgba(0,255,208,0.14)'; b.style.color='#00ffd0'; b.disabled=true;
+}
+function buyNow(){
+  const p=document.getElementById('phoneIn').value.trim();
+  if(p.length<10){alert('Please enter & verify your number first!');return;}
+  const l=C.l||DEF.l;
+  const buyLink = l.buy || l.tg || '#';
+  window.open(buyLink,'_blank');
+  if(l.buy_ig==='yes' && l.ig) setTimeout(()=>window.open(l.ig,'_blank'),400);
+}
+
+// ── RUN ───────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
