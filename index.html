@@ -1,0 +1,15 @@
+PLACEHOLDERasync function loadFromCloud(){
+  try {
+    const res = await fetch('https://api.jsonbin.io/v3/b/69b60398b7ec241ddc6c2ad1/latest', {
+      headers:{'X-Master-Key':'$2a$10$t3EQahbSMzxqLYJeRbDXXuvGrxTIJPDHQxNn6igx6e/pL/wFXtnli'}
+    });
+    const json = await res.json();
+    console.log('Cloud data loaded:', json);
+    if(json.record && json.record.g){
+      C = {...DEF, ...json.record};
+      localStorage.setItem('parcham_cfg', JSON.stringify(C));
+      render();
+    }
+  } catch(e){ console.log('Cloud error:',e); }
+}
+loadFromCloud();
